@@ -36,7 +36,7 @@ export const PACKS: Pack[] = [
     id: "kazakh",
     name: "КАЗАХСТАН",
     tagline: "вглубь степи",
-    emoji: "🦅",
+    emoji: "🐎",
     world: "steppe",
     prompts: KAZAKH_PROMPTS,
   },

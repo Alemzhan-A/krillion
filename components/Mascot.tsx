@@ -14,16 +14,24 @@ function Ball({ size, color }: { size: number; color: string }) {
   );
 }
 
-/** беркут — тот, кто уходит вглубь степи */
-function Eagle({ size, color }: { size: number; color: string }) {
+/** конь — тот, кто уходит вглубь степи */
+function Horse({ size, color }: { size: number; color: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" shapeRendering="crispEdges" aria-hidden>
-      <path d="M6 5h4v6H6z" fill={color} />
-      <path d="M1 6h5v2H2v1H1zM10 6h5v3h-1V8h-4z" fill={color} opacity={0.8} />
-      <path d="M7 3h2v2H7z" fill={color} />
-      <rect x={9} y={3} width={1} height={1} fill="#1a1008" />
-      <path d="M10 4h2v1h-2z" fill="#e8a33d" />
-      <path d="M6 11h1v3H6zM9 11h1v3H9z" fill="#e8a33d" opacity={0.9} />
+      {/* корпус */}
+      <path d="M3 7h8v4H3z" fill={color} />
+      {/* шея и голова */}
+      <path d="M10 5h3v2h1v2h-3V7h-1z" fill={color} />
+      <path d="M12 3h1v2h-1z" fill={color} opacity={0.85} />
+      {/* грива */}
+      <path d="M9 4h1v3H9zM10 3h1v2h-1z" fill={color} opacity={0.6} />
+      {/* хвост */}
+      <path d="M1 7h2v5H1V9h1V8H1z" fill={color} opacity={0.65} />
+      {/* ноги */}
+      <path d="M4 11h1v4H4zM6 11h1v4H6zM8 11h1v4H8zM10 11h1v4h-1z" fill={color} opacity={0.85} />
+      {/* глаз и морда */}
+      <rect x={12} y={6} width={1} height={1} fill="#1a1008" />
+      <path d="M13 8h1v1h-1z" fill="#1a1008" opacity={0.5} />
     </svg>
   );
 }
@@ -51,7 +59,7 @@ export default function Mascot({
       {world === "stadium" ? (
         <Ball size={size} color={color} />
       ) : (
-        <Eagle size={size} color={color} />
+        <Horse size={size} color={color} />
       )}
     </span>
   );

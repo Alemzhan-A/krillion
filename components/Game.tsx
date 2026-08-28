@@ -34,7 +34,7 @@ import {
 } from "@/lib/tiers";
 
 /** сколько держим баннер приземления перед следующим вопросом */
-const LANDING_MS = 2100;
+const LANDING_MS = 3000;
 /** с этой секунды таймер «горячий» */
 const HOT_S = 5;
 const PACK_KEY = "krillion:pack";

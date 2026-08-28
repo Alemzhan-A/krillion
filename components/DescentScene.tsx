@@ -4,13 +4,16 @@ import { useEffect, useRef } from "react";
 import { WORLDS, type WorldId } from "@/lib/worlds";
 import { MAX_DAY_SCORE, METRES_PER_POINT, TIERS, type TierId } from "@/lib/tiers";
 import Mascot from "./Mascot";
+import DeepProps from "./DeepProps";
 import Surface from "./Surface";
 
 const FLOOR_M = MAX_DAY_SCORE * METRES_PER_POINT; // 7000 м
 const PX_PER_M = 0.5;
 const WORLD_PX = FLOOR_M * PX_PER_M;
-/** доля высоты экрана, на которой висит криль */
+/** доля высоты экрана, на которой висит маскот */
 const EYE = 0.4;
+/** сколько длится один заход вниз */
+export const DIVE_MS = 1800;
 
 function mix(a: string, b: string, t: number): [number, number, number] {
   const hex = (h: string) =>
@@ -92,6 +95,8 @@ export default function DescentScene({
   const worldRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef(depthM);
   const currentRef = useRef(depthM);
+  /** текущий заход вниз: откуда, куда и когда начали */
+  const tweenRef = useRef({ from: depthM, to: depthM, start: 0 });
 
   targetRef.current = depthM;
 
@@ -136,11 +141,21 @@ export default function DescentScene({
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
 
-      // плавно догоняем целевую глубину
+      // опускаемся не рывком: полтора приличных вдоха на весь заход
       const target = targetRef.current;
-      const cur = currentRef.current;
-      const next = reduced ? target : cur + (target - cur) * Math.min(1, dt * 1.9);
-      currentRef.current = Math.abs(target - next) < 0.5 ? target : next;
+      const tween = tweenRef.current;
+      if (target !== tween.to) {
+        tween.from = currentRef.current;
+        tween.to = target;
+        tween.start = now;
+      }
+      if (reduced) {
+        currentRef.current = target;
+      } else if (tween.to !== tween.from) {
+        const t = Math.min(1, (now - tween.start) / DIVE_MS);
+        const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        currentRef.current = tween.from + (tween.to - tween.from) * eased;
+      }
 
       const d = currentRef.current;
       worldEl.style.transform = `translate3d(0, ${-(d * PX_PER_M - h * EYE)}px, 0)`;
@@ -266,6 +281,8 @@ export default function DescentScene({
             <Fish size={size} color={m > 3000 ? "#9d7bff" : "#7d93b8"} />
           </div>
         ))}
+
+        <DeepProps world={worldId} pxPerM={PX_PER_M} />
 
         <div className="ds-floor" style={{ top: WORLD_PX, background: world.floor }} />
       </div>

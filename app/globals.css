@@ -1086,3 +1086,100 @@ body {
   .pack-tag { display: none; }
   .packs-after .pack-tag { display: block; }
 }
+
+/* ——— статистика дня ——————————————————————————— */
+
+.tstats {
+  width: 100%;
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.tstats-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.28em;
+  color: var(--cyan);
+}
+
+.tstats-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  margin: 0.5rem 0 0.7rem;
+}
+
+.tstats-big {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(77, 227, 255, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+
+.tstats-head b {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.2rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 209, 102, 0.4);
+}
+
+.tstats-line { font-size: 0.88rem; color: var(--ink); text-wrap: balance; }
+.tstats-sub { font-size: 0.74rem; color: var(--drift); }
+
+.tstats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  border-block: 1px solid var(--hairline);
+}
+
+.tstats-grid > div { display: flex; flex-direction: column; }
+
+.tstats-n {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.tstats-l { font-size: 0.64rem; color: var(--drift); }
+
+.tstats-foot {
+  font-size: 0.72rem;
+  color: var(--drift);
+  margin-top: 0.35rem;
+}
+
+.tstats-note {
+  font-size: 0.66rem;
+  color: rgba(125, 147, 184, 0.55);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ——— находки на глубине ————————————————————————— */
+
+.ds-deep {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.72;
+  animation: ds-sway 11s var(--ease-io) infinite;
+  will-change: transform;
+}
+
+@keyframes ds-sway {
+  0%, 100% { margin-left: -5px; }
+  50% { margin-left: 5px; }
+}
+
+@media (max-width: 40rem) {
+  .ds-deep { opacity: 0.5; }
+}

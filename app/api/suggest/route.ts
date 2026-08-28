@@ -12,6 +12,6 @@ export async function POST(req: Request) {
   }
   const text = (body.text ?? "").trim().slice(0, 160);
   if (text.length < 3) return NextResponse.json({ error: "too short" }, { status: 400 });
-  addSuggestion(text);
+  await addSuggestion(text);
   return NextResponse.json({ ok: true });
 }

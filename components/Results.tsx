@@ -15,6 +15,7 @@ import { plural } from "@/lib/plural";
 import type { DayComparison } from "./types";
 import type { AnswerSheet as Sheet } from "@/lib/sheet";
 import AnswerSheetView from "./AnswerSheet";
+import TodayStats from "./TodayStats";
 
 function shareText(
   dayNumber: number,
@@ -155,31 +156,7 @@ export default function Results({
         ))}
       </div>
 
-      {comparison && comparison.betterThan !== null && comparison.plays > 1 && (
-        <>
-          <p className="compare">
-            сегодня ты глубже <strong>{comparison.betterThan}%</strong> нырявших
-            <span className="compare-n"> · {plural(comparison.plays, "погружение", "погружения", "погружений")} сегодня: {comparison.plays}</span>
-          </p>
-          {comparison.dist && (
-            <div className="dist" aria-label="распределение очков за сегодня">
-              {comparison.dist.map((n, i) => {
-                const peak = Math.max(...comparison.dist!, 1);
-                const mine = Math.min(6, Math.floor(score / 100)) === i;
-                return (
-                  <div key={i} className="dist-col">
-                    <div
-                      className={`dist-bar${mine ? " dist-bar-mine" : ""}`}
-                      style={{ height: `${Math.max(3, (n / peak) * 100)}%` }}
-                    />
-                    <span className="dist-x">{i * 100}</span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </>
-      )}
+      <TodayStats comparison={comparison} score={score} />
 
       <div className="stats">
         <div>

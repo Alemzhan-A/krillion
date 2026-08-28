@@ -23,11 +23,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "bad request" }, { status: 400 });
   }
 
-  recordScore(date, pack.id, playerId, score);
+  await recordScore(date, pack.id, playerId, score);
 
   // погружение окончено — вот весь лист ответов, включая непойманное
   return NextResponse.json({
-    ...compare(date, pack.id, score),
+    ...(await compare(date, pack.id, score)),
     sheet: answerSheet(date, pack.id),
   });
 }
