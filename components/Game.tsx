@@ -356,7 +356,7 @@ export default function Game() {
         sad={landed !== null && landed.tier === null}
       />
 
-      <header className="hud">
+      <header className="hud" data-playing={phase !== "intro" || undefined}>
         <Link href="/" className="hud-brand">
           КРИЛЛИОН
         </Link>

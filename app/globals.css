@@ -849,6 +849,9 @@ body {
   .pod-num { font-size: 1.3rem; }
   .pod-label { font-size: 0.52rem; letter-spacing: 0.22em; }
   .hud-brand { font-size: 1rem; letter-spacing: 0.12em; }
+  /* на телефоне во время партии логотип только отнимает место у приборов */
+  .hud[data-playing] .hud-brand { display: none; }
+  .hud[data-playing] { justify-content: space-between; gap: 0.4rem; }
   .sonar { width: 38px; height: 38px; }
 }
 
@@ -1182,4 +1185,14 @@ body {
 
 @media (max-width: 40rem) {
   .ds-deep { opacity: 0.5; }
+}
+
+/* горная гряда стоит на самом горизонте, позади юрт */
+.ds-range {
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  opacity: 0.95;
 }

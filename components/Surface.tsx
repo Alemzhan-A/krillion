@@ -127,6 +127,45 @@ function GoalNet() {
 
 /* ——— степь ————————————————————————————————————— */
 
+/** Заилийский Алатау — стена, которая держит небо над Алматы */
+function Mountains() {
+  return (
+    <svg
+      viewBox="0 0 800 230"
+      width="100%"
+      height={230}
+      preserveAspectRatio="none"
+      shapeRendering="geometricPrecision"
+      aria-hidden
+    >
+      {/* дальняя гряда — тонет в дымке */}
+      <path
+        d="M0 230V150l58-46 44 34 52-58 60 52 46-32 62 58 54-70 66 74 48-40 60 52 50-44 56 48 44-30 40 32v50z"
+        fill="#6f7f9e"
+        opacity={0.45}
+      />
+      {/* ближняя гряда */}
+      <path
+        d="M0 230V178l70-62 56 46 62-76 72 84 58-52 76 76 62-64 72 70 56-48 68 60 48-38v56z"
+        fill="#4d5b72"
+        opacity={0.75}
+      />
+      {/* снежные шапки на ближних вершинах */}
+      <path d="M188 86l30 36-30-8-26 10z" fill="#f2f7ff" opacity={0.85} />
+      <path d="M386 102l26 26-26-6-24 8z" fill="#f2f7ff" opacity={0.8} />
+      <path d="M582 106l24 24-24-6-22 8z" fill="#f2f7ff" opacity={0.75} />
+      <path d="M126 116l24 20-24-4-20 6z" fill="#f2f7ff" opacity={0.6} />
+      {/* подножие уходит в зелёные предгорья */}
+      <path
+        d="M0 230v-26l90-16 84 14 96-20 92 22 100-18 88 16 90-14 60 12v30z"
+        fill="#3f5a3c"
+        opacity={0.8}
+      />
+    </svg>
+  );
+}
+
+
 function Yurt() {
   return (
     <svg viewBox="0 0 64 40" width={64} height={40} shapeRendering="crispEdges" aria-hidden>
@@ -260,7 +299,11 @@ export default function Surface({ world }: { world: WorldId }) {
   if (world === "steppe") {
     return (
       <div className="ds-above" aria-hidden>
-        <div className="ds-sun ds-sun-low" style={{ top: -180, left: "78%" }} />
+        <div className="ds-range">
+          <Mountains />
+        </div>
+
+        <div className="ds-sun ds-sun-low" style={{ top: -250, left: "78%" }} />
 
         <div className="ds-cloud ds-drift-a" style={{ top: -380, left: "10%" }}>
           <Cloud w={140} fill="rgba(255,238,205,0.75)" />

@@ -38,7 +38,7 @@ export const TIERS: Record<TierId, Tier> = {
   },
   schooler: {
     id: "schooler",
-    name: "Косячный",
+    name: "Стайный",
     score: 30,
     emoji: "🐟",
     blurb: "Крепко — плывёшь вместе со стаей.",
@@ -101,7 +101,7 @@ export const SCORE_BANDS: ScoreBand[] = [
     min: 151,
     tier: "schooler",
     range: "151–250",
-    verdict: "Косяк. Плывёшь вместе со стаей.",
+    verdict: "Стая. Плывёшь вместе со всеми.",
   },
   {
     min: 251,
